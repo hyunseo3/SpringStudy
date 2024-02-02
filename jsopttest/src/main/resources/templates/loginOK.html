@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.prg">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function kakaoLogout(){
+		Kakao.init("e0bde495689b806d30cf2a3902a5def0");		
+		function kakaoLogout(){
+			KaKao.API.request({
+				url:"/v1/user/unlink",
+				success:function(){
+					alert("카카오 로그아웃");
+					location.href="/login.html";
+				}
+			});
+		}
+	}
+</script>
+</head>
+<body>
+	<div th:if="${session.name!=null}">
+		<p><span th:text="${session.name}"></span>님, 로그인하였습니다.</p>
+		<a href="javascript:kakaoLogout()">로그아웃</a>
+	</div>
+</body>
+</html>

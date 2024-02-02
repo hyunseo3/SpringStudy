@@ -1,0 +1,47 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script>
+		$(function () {
+			$.ajax({
+				url: "/newBook",
+				success: function (arr) {
+					$.each(arr, function () {
+						var title = this.title;
+						var link = this.link;
+						var li = $("<li></li>");
+						var a = $("<a></a>").html(this.title);
+						$(a).attr("href", link);
+						$(li).append(a);
+						$("#list").append(li);
+					});
+				}
+			});
+
+			setInterval(function () {
+				$.ajax({
+					url: "/seat",
+					success: function (seatVal) {
+						$("#seatspan").html(seatVal);
+					}
+				});
+			}, 5000);
+		}); // 이 부분에 세미콜론 추가
+
+
+	</script>
+</head>
+
+<body>
+	<h4>마포 평생 학습관 잔여 좌석:</h4>
+	<span id="seatspan"></span>
+	<br />
+	<h2>새로운 도서정보</h2>
+	<ul id="list"></ul>
+	<br />
+</body>
+
+</html>
